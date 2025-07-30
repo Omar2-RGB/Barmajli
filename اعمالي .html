@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>برمجلي</title>
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="برمجلي" />
+  <meta property="og:description" content="نصمّم لك المواقع والتطبيقات باحترافية وجودة عالية" />
+  <meta property="og:image" content="https://omar2-rgb.github.io/Works/booking-site.png" />
+  <meta property="og:url" content="https://omar2-rgb.github.io/Works/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="ar_AR" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      margin: 0; padding: 0;
+      background-color: #e9f0fb;
+      color: #0a2342;
+      scroll-behavior: smooth;
+    }
+    header {
+      background: linear-gradient(135deg, #0a2342 0%, #005aab 100%);
+      color: white;
+      padding: 2rem 1rem 3rem;
+      text-align: center;
+      position: relative;
+    }
+    #logo-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    #logo-container img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      margin-bottom: 0.5rem;
+    }
+    #logo-container h1 {
+      margin: 0;
+      font-size: 2.8rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      user-select: none;
+    }
+    header p {
+      margin-top: 0.5rem;
+      font-size: 1.3rem;
+      font-weight: 500;
+    }
+    .btn {
+      display: inline-block;
+      background-color: #0077d9;
+      color: white;
+      padding: 0.8rem 1.8rem;
+      text-decoration: none;
+      border-radius: 8px;
+      margin-top: 1.8rem;
+      font-weight: 700;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0, 119, 217, 0.4);
+    }
+    .btn:hover {
+      background-color: #005aab;
+      box-shadow: 0 6px 14px rgba(0, 90, 171, 0.6);
+    }
+    section {
+      padding: 2rem 1rem;
+      text-align: center;
+      max-width: 1200px;
+      margin: auto;
+    }
+    h2 {
+      font-size: 2rem;
+      border-bottom: 3px solid #0077d9;
+      display: inline-block;
+      margin-bottom: 1.3rem;
+      color: #003865;
+      font-weight: 700;
+    }
+    .services, .portfolio {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.8rem;
+      margin-top: 2.5rem;
+    }
+    .card {
+      background-color: white;
+      border-radius: 16px;
+      padding: 1.4rem 1.2rem;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+    }
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.15);
+    }
+    .card img {
+      width: 100%;
+      height: 160px;
+      border-radius: 12px;
+      margin-bottom: 1.2rem;
+      cursor: pointer;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .card img:hover {
+      transform: scale(1.07);
+    }
+    footer {
+      background-color: #0a2342;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      user-select: none;
+    }
+    .gallery {
+      display: flex;
+      overflow-x: auto;
+      gap: 12px;
+      padding-bottom: 12px;
+      scroll-behavior: smooth;
+    }
+    .gallery img {
+      flex: 0 0 auto;
+      height: 150px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      object-fit: cover;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+    .gallery img:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    }
+    .gallery::-webkit-scrollbar {
+      height: 9px;
+    }
+    .gallery::-webkit-scrollbar-thumb {
+      background-color: #0077d9;
+      border-radius: 6px;
+    }
+    #modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(0,0,0,0.95);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      flex-direction: column;
+    }
+    #modal img {
+      max-width: 90%;
+      max-height: 80vh;
+      border-radius: 12px;
+      box-shadow: 0 0 28px black;
+    }
+    #modal-controls {
+      margin-top: 1.2rem;
+      display: flex;
+      gap: 2.5rem;
+      user-select: none;
+    }
+    #modal-controls button {
+      background-color: #0077d9;
+      border: none;
+      padding: 0.7rem 1.4rem;
+      color: white;
+      font-size: 1.3rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: background-color 0.3s;
+    }
+    #modal-controls button:hover {
+      background-color: #005aab;
+    }
+    #modal-close {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: transparent;
+      border: none;
+      font-size: 2.8rem;
+      color: white;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    #modal-close:hover {
+      color: #0077d9;
+    }
+    #social-fixed {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 10000;
+    }
+    #social-fixed a {
+      background: #0077d9;
+      color: white;
+      padding: 0.9rem 1.3rem;
+      border-radius: 50px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.35);
+      transition: background-color 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.1rem;
+      user-select: none;
+    }
+    #social-fixed a:hover {
+      background: #005aab;
+    }
+    @media (max-width: 600px) {
+      .gallery img {
+        height: 100px;
+      }
+      section {
+        padding: 1rem;
+      }
+      #logo-container img {
+        width: 60px;
+        height: 60px;
+      }
+      #logo-container h1 {
+        font-size: 2rem;
+      }
+    }
+    #contact-section {
+      background: white;
+      max-width: 400px;
+      margin: 2rem auto;
+      padding: 1.8rem 1.5rem;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    #contact-section h2 {
+      color: #0077d9;
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+    }
+    #contact-section p {
+      margin-bottom: 0.7rem;
+      font-size: 1.1rem;
+      color: #0a2342;
+      user-select: text;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div id="logo-container" role="img" aria-label="لوغو برمجلي">
+      <img src="logo.png" alt="لوغو برمجلي" />
+      <h1>برمجلي</h1>
+    </div>
+    <p>نصمّم لك المواقع والتطبيقات باحترافية وجودة عالية</p>
+    <a href="https://wa.me/963995339401" target="_blank" rel="noopener noreferrer" class="btn" aria-label="تواصل معنا عبر واتساب">تواصل معنا عبر واتساب</a>
+  </header>
+
+  <section>
+    <h2>خدماتنا</h2>
+    <div class="services">
+      <div class="card">
+        <h3>تصميم مواقع ويب</h3>
+        <p>نصمّم مواقع حديثة وسريعة ومتوافقة مع جميع الأجهزة.</p>
+      </div>
+      <div class="card">
+        <h3>برمجة تطبيقات سطح المكتب</h3>
+        <p>أنظمة مخصصة للمؤسسات مثل إدارة العيادات والمدارس والمحلات.</p>
+      </div>
+      <div class="card">
+        <h3>تطبيقات موبايل</h3>
+        <p>تصميم وبرمجة تطبيقات أندرويد بسيطة وعملية حسب طلب العميل.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact-section" aria-label="طرق التواصل">
+    <h2>تواصل معنا</h2>
+    <p>رقم الواتساب:</p>
+    <p id="whatsappNumber" onclick="copyToClipboard()" title="انقر لنسخ الرقم" style="user-select: all; cursor: pointer;">+963 995 339 401</p>
+    <p style="font-size: 0.9rem; color: #666;">انسخ الرقم ثم افتح تطبيق واتساب للتواصل بسهولة.</p>
+  </section>
+
+  <section>
+    <h2>أعمالنا</h2>
+    <div class="portfolio">
+      <a href="https://omar2-rgb.github.io/Works/clinic-system/" target="_blank" rel="noopener noreferrer">
+        <div class="card">
+          <img src="clinic-system.jpg" alt="نظام عيادة الأسنان" />
+          <h4>نظام إدارة عيادة أسنان</h4>
+          <p>واجهة أنيقة وإدارة متكاملة للمرضى، المواعيد، والفواتير.</p>
+        </div>
+      </a>
+      <a href="https://omar2-rgb.github.io/Works/booking-site/" target="_blank" rel="noopener noreferrer">
+        <div class="card">
+          <img src="booking-site.jpg" alt="موقع حجز مواعيد" />
+          <h4>موقع حجز مواعيد</h4>
+          <p>موقع ويب يسمح للمستخدمين بالحجز، وتأكيد المواعيد عبر إشعارات واتساب تلقائية.</p>
+        </div>
+      </a>
+      <a href="https://omar2-rgb.github.io/Ssammili/" target="_blank" rel="noopener noreferrer">
+        <div class="card">
+          <img src="sommelly.jpg" alt="موقع صمملي" />
+          <h4>موقع صمملي</h4>
+          <p>منصة طلب تصميمات سهلة الاستخدام، موجهة للمصممين والعملاء لتقديم الخدمات الإبداعية.</p>
+        </div>
+      </a>
+      <a href="https://omar2-rgb.github.io/MADLIN-STYLE" target="_blank" rel="noopener noreferrer">
+        <<a href="https://omar2-rgb.github.io/MADLIN-STYLE" target="_blank" rel="noopener noreferrer">
+        <div class="card">
+          <img src="madlin-site.jpg" alt="موقع MADLIN STYLE" />
+          <h4>موقع MADLIN STYLE</h4>
+          <p>موقع تجاري لعرض منتجات أزياء نسائية بتصميم عصري وتوافق تام مع الهاتف.</p>
+        </div>
+      </a>
+      <a href="https://omar2-rgb.github.io/Karawya/index" target="_blank" rel="noopener noreferrer">
+        <div class="card">
+          <img src="karawya.jpg" alt="موقع كراويا" />
+          <h4>موقع كراويا</h4>
+          <p>موقع تسوّق كويتي يعرض منتجات متنوعة بواجهة أنيقة وتجربة مستخدم سهلة.</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <h2>معرض صور موقع الحجز</h2>
+    <div class="gallery" id="booking-gallery" tabindex="0" aria-label="معرض صور موقع الحجز">
+      <img src="booking1.jpg" alt="حجز 1" />
+      <img src="booking2.jpg" alt="حجز 2" />
+      <img src="booking3.jpg" alt="حجز 3" />
+      <img src="booking4.jpg" alt="حجز 4" />
+      <img src="booking5.jpg" alt="حجز 5" />
+    </div>
+  </section>
+
+  <section>
+    <h2>معرض صور برنامج العيادة</h2>
+    <div class="gallery" id="clinic-gallery" tabindex="0" aria-label="معرض صور برنامج العيادة">
+      <img src="clinic1.jpg" alt="عيادة 1" />
+      <img src="clinic2.jpg" alt="عيادة 2" />
+      <img src="clinic-system.jpg" alt="عيادة 3" />
+      <img src="clinic4.jpg" alt="عيادة 4" />
+      <img src="clinic5.jpg" alt="عيادة 5" />
+      <img src="clinic6.jpg" alt="عيادة 6" />
+      <img src="clinic7.jpg" alt="عيادة 7" />
+      <img src="clinic8.jpg" alt="عيادة 8" />
+      <img src="clinic9.jpg" alt="عيادة 9" />
+      <img src="clinic10.jpg" alt="عيادة 10" />
+      <img src="clinic11.jpg" alt="عيادة 11" />
+      <img src="clinic12.jpg" alt="عيادة 12" />
+      <img src="clinic13.jpg" alt="عيادة 13" />
+      <img src="clinic14.jpg" alt="عيادة 14" />
+      <img src="clinic15.jpg" alt="عيادة 15" />
+      <img src="clinic16.jpg" alt="عيادة 16" />
+      <img src="clinic17.jpg" alt="عيادة 17" />
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 برمجلي. جميع الحقوق محفوظة.</p>
+  </footer>
+
+  <!-- Modal تكبير الصور -->
+  <div id="modal" tabindex="0" aria-modal="true" role="dialog">
+    <button id="modal-close" aria-label="إغلاق">&times;</button>
+    <img id="modal-img" src="" alt="تكبير صورة" />
+    <div id="modal-controls">
+      <button id="prev-btn" aria-label="الصورة السابقة">‹ السابق</button>
+      <button id="next-btn" aria-label="الصورة التالية">التالي ›</button>
+    </div>
+  </div>
+
+  <div id="social-fixed" aria-label="روابط التواصل">
+    <a href="https://wa.me/963995339401" target="_blank" rel="noopener" aria-label="واتساب">واتساب</a>
+    <a href="https://instagram.com/omar.codes23" target="_blank" rel="noopener" aria-label="إنستغرام">إنستغرام</a>
+  </div>
+
+  <script>
+    // نسخ رقم الواتساب عند النقر
+    function copyToClipboard() {
+      const whatsappNumber = document.getElementById('whatsappNumber').innerText;
+      navigator.clipboard.writeText(whatsappNumber).then(() => {
+        alert('تم نسخ رقم الواتساب: ' + whatsappNumber);
+      }).catch(() => {
+        alert('فشل النسخ، يرجى نسخه يدويًا.');
+      });
+    }
+
+    (() => {
+      const modal = document.getElementById('modal');
+      const modalImg = document.getElementById('modal-img');
+      const modalClose = document.getElementById('modal-close');
+      const prevBtn = document.getElementById('prev-btn');
+      const nextBtn = document.getElementById('next-btn');
+      const galleries = [...document.querySelectorAll('.gallery')];
+      let currentGallery = null;
+      let currentIndex = -1;
+      let currentImages = [];
+
+      function openModal(src, galleryIndex, imgIndex) {
+        currentGallery = galleryIndex;
+        currentIndex = imgIndex;
+        currentImages = Array.from(galleries[currentGallery].querySelectorAll('img')).map(img => img.src);
+        modal.style.display = 'flex';
+        modalImg.src = src;
+        modal.focus();
+        updateButtons();
+      }
+
+      function updateButtons() {
+        prevBtn.disabled = (currentIndex <= 0);
+        nextBtn.disabled = (currentIndex >= currentImages.length - 1);
+      }
+
+      function showNext() {
+        if (currentIndex < currentImages.length - 1) {
+          currentIndex++;
+          modalImg.src = currentImages[currentIndex];
+          updateButtons();
+        }
+      }
+
+      function showPrev() {
+        if (currentIndex > 0) {
+          currentIndex--;
+          modalImg.src = currentImages[currentIndex];
+          updateButtons();
+        }
+      }
+
+      function closeModal() {
+        modal.style.display = 'none';
+        modalImg.src = '';
+        currentGallery = null;
+        currentIndex = -1;
+        currentImages = [];
+      }
+
+      galleries.forEach((gallery, gIndex) => {
+        gallery.querySelectorAll('img').forEach((img, iIndex) => {
+          img.addEventListener('click', () => {
+            openModal(img.src, gIndex, iIndex);
+          });
+        });
+      });
+
+      nextBtn.addEventListener('click', showNext);
+      prevBtn.addEventListener('click', showPrev);
+      modalClose.addEventListener('click', closeModal);
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (modal.style.display === 'flex') {
+          if (e.key === 'ArrowRight') showNext();
+          else if (e.key === 'ArrowLeft') showPrev();
+          else if (e.key === 'Escape') closeModal();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
